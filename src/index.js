@@ -1,35 +1,46 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import Triangle from './js/triangle.js';
-import Rectangle from './js/rectangle.js';
+import WeatherService from './weather-service.js';
 
-function handleTriangleForm(event) {
-  event.preventDefault();
-  document.querySelector('#response').innerText = null;
-  const length1 = parseInt(document.querySelector('#length1').value);
-  const length2 = parseInt(document.querySelector('#length2').value);
-  const length3 = parseInt(document.querySelector('#length3').value);
-  const triangle = new Triangle(length1, length2, length3);
-  const response = triangle.checkType();
-  const pTag = document.createElement("p");
-  pTag.append(`Your result is: ${response}.`);
-  document.querySelector('#response').append(pTag);
+// Business Logic
+
+function getWeather(lat, lon) {
+  WeatherService.getWeather(lat, lon)
+    .then(function(response) {
+      if (response.main) {
+        printElements(response, lat, lon);
+      } else {
+        printError(response, lat, lon);
+      }
+    });
 }
 
-function handleRectangleForm(event) {
+// UI Logic
+
+function printElements(response, lat, lon) {
+  document.querySelector('#showResponse').innerText = `Here are the weather details for ${lat}, ${lon}:
+  The temperature is ${response.main.temp} degrees Fahrenheit, but it feels like ${response.main.feels_like}.\n
+  There are winds of ${response.wind.speed} mph with gusts (if available) of up to ${response.wind.gust}.\n
+  
+  
+  
+  `;
+}
+
+function printError(error, lat, lon) {
+  document.querySelector('#showResponse').innerText = `There was an error accessing the weather data for ${lat}, ${lon}:\n 
+  ${error}.`;
+}
+
+function handleFormSubmission(event) {
   event.preventDefault();
-  document.querySelector('#response2').innerText = null;
-  const length1 = parseInt(document.querySelector('#rect-length1').value);
-  const length2 = parseInt(document.querySelector('#rect-length2').value);
-  const rectangle = new Rectangle(length1, length2);
-  const response = rectangle.getArea();
-  const pTag = document.createElement("p");
-  pTag.append(`The area of the rectangle is ${response}.`);
-  document.querySelector('#response2').append(pTag);
+  const lat = document.querySelector('#lat').value;
+  const lon = document.querySelector('#lon').value;
+  document.querySelector('#location').value = null;
+  getWeather(lat, lon);
 }
 
 window.addEventListener("load", function() {
-  document.querySelector("#triangle-checker-form").addEventListener("submit", handleTriangleForm);
-  document.querySelector("#rectangle-area-form").addEventListener("submit", handleRectangleForm);
+  document.querySelector('form').addEventListener("submit", handleFormSubmission);
 });
