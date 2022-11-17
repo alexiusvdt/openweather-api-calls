@@ -1,7 +1,7 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import WeatherService from './weather-service.js';
+import WeatherService from './js/weather-service.js';
 
 // Business Logic
 
@@ -34,7 +34,8 @@ function handleFormSubmission(event) {
   event.preventDefault();
   const lat = document.querySelector('#lat').value;
   const lon = document.querySelector('#lon').value;
-  document.querySelector('#location').value = null;
+  document.querySelector('#lat').value = null;
+  document.querySelector('#lon').value = null;
   getWeather(lat, lon);
 }
 
