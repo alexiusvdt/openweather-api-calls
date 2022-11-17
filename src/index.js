@@ -19,10 +19,10 @@ function getWeather(lat, lon) {
 // UI Logic
 
 function printElements(response, lat, lon) {
-  document.querySelector('#showResponse').innerText = `Here are the weather details for ${lat}, ${lon}:
+  document.querySelector('#showResponse').innerText = `Here are the weather details for ${lat}, ${lon}:\n
   The temperature is ${response.main.temp} degrees Fahrenheit, but it feels like ${response.main.feels_like}.\n
   There are winds of ${response.wind.speed} mph with gusts (if available) of up to ${response.wind.gust}.\n
-  It is ${response.clouds}% cloudy.`;
+  It is ${response.clouds.all}% cloudy.`;
 }
 
 function printError(error, lat, lon) {
@@ -39,6 +39,13 @@ function handleFormSubmission(event) {
   getWeather(lat, lon);
 }
 
+function packageData(event) {
+  event.preventDefault();
+  //set all the variables to what he needs on export & send file.
+}
+
 window.addEventListener("load", function() {
   document.querySelector('form').addEventListener("submit", handleFormSubmission);
+  document.querySelector('form2').addEventListener("submit", packageData);
+
 });
