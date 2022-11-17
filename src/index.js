@@ -22,10 +22,7 @@ function printElements(response, lat, lon) {
   document.querySelector('#showResponse').innerText = `Here are the weather details for ${lat}, ${lon}:
   The temperature is ${response.main.temp} degrees Fahrenheit, but it feels like ${response.main.feels_like}.\n
   There are winds of ${response.wind.speed} mph with gusts (if available) of up to ${response.wind.gust}.\n
-  
-  
-  
-  `;
+  It is ${response.clouds}% cloudy.`;
 }
 
 function printError(error, lat, lon) {
