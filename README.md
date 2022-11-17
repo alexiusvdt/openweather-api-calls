@@ -1,6 +1,6 @@
-# (Application Name)
+# OpenWeather API Calls
 
-#### (Brief Description of Application)
+#### weather calls for use with Survey123 data collection
 
 #### By Alex Johnson
 
@@ -12,10 +12,13 @@
 * Node.js
 * bootstrap
 * jest
-*  [add more as they come!]
+* eslint
+* babel
+* webpack
+
 
 ## Description
- keep it brief!
+ Simple API GET call & return various datapoints
 
 
 ## Setup/Installation Requirements
@@ -42,6 +45,7 @@ dev note:
 
 ## Future implementations
 
+* hourly/daily/etc forecasts
 
 ## License
 MIT License
