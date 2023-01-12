@@ -1,6 +1,6 @@
 # OpenWeather API Calls
 
-#### weather calls for use with Survey123 data collection
+#### weather calls for use with data collection applications
 
 #### By Alex Johnson
 
